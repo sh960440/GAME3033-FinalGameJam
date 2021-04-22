@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // Other screens
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject gameoverScreen;
+
+    // GameplayUi
+    [SerializeField] private Text targetText;
+    [SerializeField] private Text currentText;
+    [SerializeField] private Text timerText;
+    [SerializeField] private Text levelText;
+
     private bool isPaused = false;
 
     // Start is called before the first frame update
