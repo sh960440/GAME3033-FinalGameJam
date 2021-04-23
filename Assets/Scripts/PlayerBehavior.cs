@@ -10,10 +10,12 @@ public class PlayerBehavior : MonoBehaviour
     private Vector2 mouseValue;
     private Rigidbody rb;
     private GameManager gameManager;
+    private AudioSource pickSound;
 
     // Start is called before the first frame update
     void Start()
     {
+        pickSound = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
         gameManager = FindObjectOfType<GameManager>();
     }
@@ -21,6 +23,8 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameManager.isPlaying) return;
+
         if (isRotating)
         {
             transform.Rotate(2.0f * new Vector3(0, mouseValue.x, 0)); // Rotate speed = 2.0f
@@ -36,19 +40,29 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
+    public void ResetPosition()
+    {
+        transform.position = new Vector3(0, transform.position.y, 0);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collide"); 
         switch (other.tag)
         {
             case "Operator":
                 gameManager.OperateNum(other.GetComponent<OperatorBehavior>().operation, other.GetComponent<OperatorBehavior>().value);
+                pickSound.Play();
                 break;
             case "Square":
                 gameManager.SquareNum();
+                pickSound.Play();
                 break;
             case "SquareRoot":
                 gameManager.SquareRootNum();
+                pickSound.Play();
+                break;
+            case "DeathPlane":
+                gameManager.GameOver(false);
                 break;
             default:
                 break;

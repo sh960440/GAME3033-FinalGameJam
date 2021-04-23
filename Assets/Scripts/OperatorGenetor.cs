@@ -7,28 +7,43 @@ public class OperatorGenetor : MonoBehaviour
     [SerializeField] private GameObject[] operatorPrefabs;
     [SerializeField] private GameObject SquarePrefab;
     [SerializeField] private GameObject SqrtPrefab;
-    [SerializeField] private float[] yPositions;
     
-    // Start is called before the first frame update
     void Start()
     {
-        GenerateOperator();
+        GenerateOperators();
     }
 
-    public void GenerateOperator()
+    public void GenerateOperators()
     {
-        int size = operatorPrefabs.Length;
+        DestroyPickups();
 
-        for (int i = 0; i < yPositions.Length; i++)
+        for (int j = 0; j < 25; j++)
         {
-            for (int j = 0; j <= 25; j++)
-            {
-                int index = Random.Range(0, size);
-                Instantiate(operatorPrefabs[index], new Vector3(Random.Range(-24.5f, 24.5f), yPositions[i], Random.Range(-24.5f, 24.5f)), Quaternion.identity, this.transform);
-            }
+            int index;
 
-            Instantiate(SquarePrefab, new Vector3(Random.Range(-24.5f, 24.5f), yPositions[i], Random.Range(-24.5f, 24.5f)), Quaternion.identity, this.transform);
-            Instantiate(SqrtPrefab, new Vector3(Random.Range(-24.5f, 24.5f), yPositions[i], Random.Range(-24.5f, 24.5f)), Quaternion.identity, this.transform);
+            int seed = Random.Range(0, 100);
+            if (seed < 35)
+                index = 0;
+            else if (seed >= 35 && seed < 65)
+                index = 1;
+            else if (seed >= 65 && seed < 90)
+                index = 2;
+            else
+                index = 3;
+
+            Instantiate(operatorPrefabs[index], new Vector3(Random.Range(-24.5f, 24.5f), 1, Random.Range(-24.5f, 24.5f)), Quaternion.identity, this.transform);
+        }
+
+        Instantiate(SquarePrefab, new Vector3(Random.Range(-24.5f, 24.5f), 1, Random.Range(-24.5f, 24.5f)), Quaternion.identity, this.transform);
+        Instantiate(SqrtPrefab, new Vector3(Random.Range(-24.5f, 24.5f), 1, Random.Range(-24.5f, 24.5f)), Quaternion.identity, this.transform);
+    }
+
+    private void DestroyPickups()
+    {
+        OperatorBehavior[] operationObjects = FindObjectsOfType<OperatorBehavior>();
+        foreach (OperatorBehavior obj in operationObjects)
+        {
+            Destroy(obj.gameObject);
         }
     }
 }
