@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerBehavior : MonoBehaviour
 {
+    [SerializeField] private Animator animator;
     private bool isMoveing, isRotating;
     private Vector2 mouseValue;
     private Rigidbody rb;
@@ -58,12 +59,12 @@ public class PlayerBehavior : MonoBehaviour
     private void OnStartMoving()
     {
         isMoveing = true;
-        //animator.SetBool("isRunning", true);
+        animator.SetBool("Run", true);
     }
     private void OnStopMoving()
     {
         isMoveing = false;
-        //animator.SetBool("isRunning", false);
+        animator.SetBool("Run", false);
     }
     private void OnStartRotating()
     {
