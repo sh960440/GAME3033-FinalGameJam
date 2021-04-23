@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text timerText;
     [SerializeField] private Text levelText;
 
+    private int currentNumber = 1;
+
     private bool isPaused = false;
 
     // Start is called before the first frame update
@@ -29,6 +31,39 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OperateNum(Operation operation, int value)
+    {
+        switch (operation)
+        {
+            case Operation.ADD:
+                currentNumber += value;
+                break;
+            case Operation.SUBTRACT:
+                currentNumber -= value;
+                break;
+            case Operation.MULTIPLY:
+                currentNumber *= value;
+                break;
+            case Operation.DIVIDE:
+                currentNumber /= value;
+                break;
+        }
+
+        currentText.text = currentNumber.ToString();
+    }
+
+    public void SquareNum()
+    {
+        currentNumber = currentNumber * currentNumber;
+        currentText.text = currentNumber.ToString();
+    }
+
+    public void SquareRootNum()
+    {
+        //currentNumber = currentNumber * currentNumber;
+        currentText.text = currentNumber.ToString();
     }
 
     public void PauseResume()

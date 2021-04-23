@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Operation
+{
+    ADD,
+    SUBTRACT,
+    MULTIPLY,
+    DIVIDE
+}
 public class OperatorBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Operation operation;
+    public int value = 1;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
         
     }

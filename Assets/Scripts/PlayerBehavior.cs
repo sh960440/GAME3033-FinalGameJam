@@ -35,6 +35,26 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collide"); 
+        switch (other.tag)
+        {
+            case "Operator":
+                gameManager.OperateNum(other.GetComponent<OperatorBehavior>().operation, other.GetComponent<OperatorBehavior>().value);
+                break;
+            case "Square":
+                gameManager.SquareNum();
+                break;
+            case "SquareRoot":
+                gameManager.SquareRootNum();
+                break;
+            default:
+                break;
+        }
+        Destroy(other.gameObject);  
+    }
+
     private void OnStartMoving()
     {
         isMoveing = true;
