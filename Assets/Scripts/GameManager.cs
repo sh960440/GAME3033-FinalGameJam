@@ -64,63 +64,39 @@ public class GameManager : MonoBehaviour
         switch (level)
         {
             case 1:
-                center = Random.Range(50, 60);
+                center = Random.Range(45, 55);
                 targetMin = center - 30;
                 targetMax = center + 30;
                 break;
             case 2:
-                center = Random.Range(80, 100);
+                center = Random.Range(90, 110);
                 targetMin = center - 25;
                 targetMax = center + 25;
                 break;
             case 3:
-                center = Random.Range(200, 400);
+            GameOver(true);
+                center = Random.Range(180, 220);
                 targetMin = center - 20;
                 targetMax = center + 20;
                 break;
             case 4:
-                center = Random.Range(300, 600);
+                center = Random.Range(360, 440);
                 targetMin = center - 15;
                 targetMax = center + 15;
                 break;
             case 5:
-                center = Random.Range(500, 800);
-                targetMin = center - 12;
-                targetMax = center + 12;
-                break;
-            case 6:
-                center = Random.Range(400, 700);
+                center = Random.Range(720, 880);
                 targetMin = center - 10;
                 targetMax = center + 10;
                 break;
-            case 7:
-                center = Random.Range(200, 600);
-                targetMin = center - 8;
-                targetMax = center + 7;
-                break;
-            case 8:
-                center = Random.Range(400, 700);
-                targetMin = center - 5;
-                targetMax = center + 5;
-                break;
-            case 9:
-                center = Random.Range(700, 1200);
-                targetMin = center - 3;
-                targetMax = center + 2;
-                break;
-            case 10:
-                center = Random.Range(1000, 2000);
-                targetMin = center;
-                targetMax = center + 1;
-                break;
-            case 11:
+            case 6:
                 GameOver(true);
                 break;
         }
 
         levelText.text = "Level " + currentLevel;
         targetText.text = targetMin + " - " + targetMax;
-        timer = 30.0f;
+        timer = 30.0f + currentLevel * 10.0f;
 
         StartCoroutine(CountDown());
     }
@@ -157,6 +133,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        if (currentNumber < 1) currentNumber = 1;
         currentText.text = currentNumber.ToString();
         CheckNumber();
     }
@@ -171,6 +148,7 @@ public class GameManager : MonoBehaviour
     public void SquareRootNum()
     {
         currentNumber = (int)Mathf.Sqrt(currentNumber);
+        if (currentNumber < 1) currentNumber = 1;
         currentText.text = currentNumber.ToString();
         CheckNumber();
     }
@@ -183,7 +161,8 @@ public class GameManager : MonoBehaviour
             currentNumber = 1;
             currentText.text = currentNumber.ToString();
             GenerateTarget(++currentLevel);
-            FindObjectOfType<PlayerBehavior>().ResetPosition();
+            FindObjectOfType<OperatorGenetor>().GenerateOperators();
+            FindObjectOfType<PlayerBehavior>().ResetPlayer();
         }
     }
 

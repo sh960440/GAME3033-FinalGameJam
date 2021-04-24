@@ -21,16 +21,16 @@ public class OperatorBehavior : MonoBehaviour
         switch (operation)
         {
             case Operation.ADD:
-                value = Random.Range(5, 20);
+                value = Random.Range(3, 20);
                 break;
             case Operation.SUBTRACT:
-                value = Random.Range(5, 20);
+                value = Random.Range(3, 20);
                 break;
             case Operation.MULTIPLY:
-                value = Random.Range(2, 13);
+                value = Random.Range(2, 11);
                 break;
             case Operation.DIVIDE:
-                value = Random.Range(2, 13);
+                value = Random.Range(2, 11);
                 break;
         }
 

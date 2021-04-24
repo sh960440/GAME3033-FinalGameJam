@@ -7,7 +7,7 @@ TagManager:
   - Operator
   - Square
   - SquareRoot
-  - DeathPlane
+  - Chest
   layers:
   - Default
   - TransparentFX
