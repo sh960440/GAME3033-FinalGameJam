@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour
                 targetMax = center + 25;
                 break;
             case 3:
-            GameOver(true);
                 center = Random.Range(180, 220);
                 targetMin = center - 20;
                 targetMax = center + 20;
